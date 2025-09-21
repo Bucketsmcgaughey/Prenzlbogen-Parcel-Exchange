@@ -1,0 +1,24 @@
+{
+    "WELCOME": "Willkommen",
+    "SIGN_IN": "Anmelden",
+    "SIGN_UP": "Registrieren",
+    "SIGN_UP_BENEFITS": "Jetzt registrieren, Pakete finden und Nachbarn helfen, ihre Pakete zu finden!",
+    "YOUR_EMAIL_ADDRESS": "Email-addresse",
+    "YOUR_PASSWORD": "Passwort",
+    "YOUR_SURNAME": "Familienname",
+    "SIGNING_IN": "In Bearbeitung...",
+    "YOUR_PARCELS": "Deine Pakete",
+    "GOT_A_PARCEL": "Hast du ein Paket für jemanden?",
+    "GOT_A_PARCEL_PARA": "Einfach den Namen wählen, wir geben bescheid.",
+    "DATUM": "Datum",
+    "HAUSNUMMER": "Hausnummer",
+    "ETAGE": "Etage",
+    "KLINGEL": "Klingel",
+    "$vuetify": {
+        "stepper": {
+            "next": "Weiter",
+            "prev": "Zurück"
+        },
+        "open": "Öffnen"
+    }
+}
