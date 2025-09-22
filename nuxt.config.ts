@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     'nuxt-users',
     '@nuxtjs/i18n',
-    'nuxt-api-shield',
   ],
   hub: {
     database: true,
@@ -35,11 +34,9 @@ export default defineNuxtConfig({
     },
     auth: {
       whitelist: [
-        '/login',
         '/signup',
         '/api/_hub/*',
         '/api/nuxt-users/register',
-        '/resetpassword',
       ],
       permissions: {
         // user: ["*"],
@@ -52,7 +49,7 @@ export default defineNuxtConfig({
           '/en/account',
           { path: '/api/nuxt-users*', methods: ['GET', 'POST', 'PATCH'] },
           { path: '/api/residents', methods: ['GET', 'POST', 'PATCH'] },
-          { path: '/api/parcels', methods: ['GET', 'POST'] }
+          { path: '/api/parcels', methods: ['GET', 'POST', 'PATCH'] }
         ],
         admin: [
           '*'

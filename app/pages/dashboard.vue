@@ -24,15 +24,31 @@ function getResidentData() {
   }
   return res
 }
-const parcels = ref(await getParcelData())
+let myParcels = ref(await getParcelData())
 
 async function getParcelData() {
-  const { data: parcels } = await useFetch('/api/parcels', {
+  let { data: parcels } = await useFetch('/api/parcels', {
     query: {
       email: user.value.email,
       is_collected_yet: false
     }
   })
+  console.log('parcels', parcels.value)
+  for (let parcel of parcels.value) {
+    const holder = residents.value.find((resident) => resident.email = parcel.current_holder)
+    parcel.current_holder = holder
+  }
+  return parcels.value
+}
+
+async function updateParcelData() {
+  let { data: parcels } = await $fetch('/api/parcels', {
+    query: {
+      email: user.value.email,
+      is_collected_yet: false
+    }
+  })
+  console.log('parcels', parcels.value)
   for (let parcel of parcels.value) {
     const holder = residents.value.find((resident) => resident.email = parcel.current_holder)
     parcel.current_holder = holder
@@ -59,6 +75,19 @@ async function updateResident() {
   }
 }
 
+async function parcelCollected(id) {
+  console.log('sending')
+  const result = await $fetch('/api/parcels', {
+    method: 'PATCH',
+    body: {
+      id: id,
+      is_collected_yet: true
+    }
+  })
+  console.log(result)
+  myParcels.value = updateParcelData()
+}
+
 if (!user.value) {
   navigateTo('/login')
 }
@@ -67,7 +96,7 @@ if (!user.value) {
 <template>
   <v-container>
     <p class="text-h4 py-4">{{ $t('YOUR_PARCELS') }}</p>
-    <v-card v-if="parcels && parcels.length > 0">
+    <v-card v-if="myParcels && myParcels.length > 0">
       <v-table>
         <thead>
           <tr>
@@ -79,7 +108,7 @@ if (!user.value) {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="parcel in parcels">
+          <tr v-for="parcel in myParcels">
             <td>{{ dayjs(parcel.date_created).fromNow() }}</td>
             <td>{{ parcel.current_holder.hausnummer }}</td>
             <td>{{ parcel.current_holder.floor }}</td>
@@ -107,8 +136,9 @@ if (!user.value) {
         <v-btn @click="updateResident" color="primary">Update</v-btn>
       </v-form>
       <div v-if="updated">Successfully updated.</div>
-      <div class="py-4">
-        <NUsersLogoutLink>Sign out</NUsersLogoutLink>
+      <div class="pa-2">
+        <!-- <NUsersLogoutLink>Sign out</NUsersLogoutLink> -->
+        <LogoutLink />
       </div>
     </v-navigation-drawer>
   </v-container>

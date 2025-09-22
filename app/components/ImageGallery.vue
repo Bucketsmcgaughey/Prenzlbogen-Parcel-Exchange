@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 const { data: images, refresh } = await useFetch('/api/images')
 
 async function uploadImage (e: Event) {
@@ -44,4 +44,4 @@ async function deleteImage (pathname: string) {
       <i>Tip: delete an image by double-clicking on it.</i>
     </p>
   </div>
-</template>
+</template> -->

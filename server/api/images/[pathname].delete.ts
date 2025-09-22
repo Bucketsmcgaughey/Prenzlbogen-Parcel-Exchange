@@ -1,5 +1,5 @@
-export default eventHandler(async (event) => {
-  const { pathname } = event.context.params || {}
+// export default eventHandler(async (event) => {
+//   const { pathname } = event.context.params || {}
 
-  return hubBlob().delete(pathname)
-})
+//   return hubBlob().delete(pathname)
+// })
